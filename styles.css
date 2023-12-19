@@ -1,0 +1,193 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #5d577c;
+    font-family: Arial, sans-serif;
+}
+
+#player1Wins, #player2Wins {
+    position: absolute;
+    top: 20px;
+    font-size: 24px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px 10px;
+    border-radius: 5px;
+    right:auto;
+    left:20px;
+}
+
+#player2Wins {
+    left: auto;
+    right: 20px;
+}
+
+#game-container {
+    display: grid;
+    grid-template-columns: repeat(10, 50px);
+    gap: 10px;
+    background-color: #c9c8c8;
+    border: 2px solid #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    border: 0px solid #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.block {
+    width: 50px;
+    height: 50px;
+    background-color: #584d2e;
+    border: 3px solid #000;
+    border-radius: 10px;
+}
+
+.bomb {
+    background-color: #000;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    animation: bombAnimation 3s infinite;
+}
+
+@keyframes bombAnimation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(0.8);
+        background-color: #8c0000;
+    }
+}
+
+.explosion {
+    background-color: #ffaa00;
+    width: 50px;
+    height: 50px;
+    border-radius: 30%;
+    position: absolute;
+    animation: explode 0.4s ease-in-out;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    30% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+        opacity: 1;
+        background-color: #a0a0a0;
+    }
+}
+
+.player-1 {
+    background-color: #0077ff;
+    border: 1px solid #0000a0;
+    border-radius: 50%;
+    width: 80%;
+    height: 80%;
+    position: relative;
+    top: 10%;
+    left: 10%;
+    animation: pulinho 1s infinite;
+}
+
+@keyframes pulinho {
+    0% {
+        top: 0;
+    }
+    50% {
+        top: 10%;
+    }
+    100% {
+        top: 0;
+    }
+}
+
+.player-2 {
+    background-color: #ff0000;
+    border: 1px solid #a00000;
+    border-radius: 50%;
+    width: 80%;
+    height: 80%;
+    position: relative;
+    top: 10%;
+    left: 10%;
+    animation: pulinho 1s infinite;
+}
+
+.player-1::before,
+.player-1::after,
+.player-2::before,
+.player-2::after {
+    content: "";
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    width: 30%;
+    height: 30%;
+}
+
+.player-1::before {
+    top: 30%;
+    left: 15%;
+}
+
+.player-1::after {
+    top: 30%;
+    left: 55%;
+}
+
+.player-2::before {
+    top: 30%;
+    left: 15%;
+}
+
+.player-2::after {
+    top: 30%;
+    left: 55%;
+}
+
+/* Adicionei uma textura de grama ao fundo do grid */
+#game-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(45deg, #228B22, #228B22 10px, #32CD32 10px, #32CD32 20px);
+    z-index: -1;
+    animation: moveBackground 30s linear infinite; /* Define a animação */
+    background-size: 100% 200%; /* Ajusta o tamanho vertical do background */
+}
+
+@keyframes moveBackground {
+    0% {
+        background-position: 0 0; /* Comece do topo */
+    }
+    100% {
+        background-position: 0 100%; /* Mova para a parte inferior */
+    }
+}
